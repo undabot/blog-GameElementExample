@@ -44,33 +44,37 @@ class TimesUpScene: SKScene {
     }
     
     private func addTitleLabel() {
-        let titleLabel = SKLabelNode(fontNamed:"AvenirNext-Medium")
+        let titleLabel = SKLabelNode(fontNamed: "AvenirNext-Medium")
         titleLabel.text = "Time is up!"
         titleLabel.fontSize = 35
-        titleLabel.position = CGPoint(x:frame.midX, y:frame.midY+80)
+        titleLabel.position = CGPoint(x: frame.midX, y: frame.midY + 80)
         titleLabel.zPosition = 1
         addChild(titleLabel)
     }
     
     private func addScoreLabel() {
-        let scoreLabel = SKLabelNode(fontNamed:"AvenirNext-Medium")
+        let scoreLabel = SKLabelNode(fontNamed: "AvenirNext-Medium")
         scoreLabel.text = "\(score) points collected."
         scoreLabel.fontSize = 25
-        scoreLabel.position = CGPoint(x:frame.midX, y:frame.midY)
+        scoreLabel.position = CGPoint(x: frame.midX, y: frame.midY)
         scoreLabel.zPosition = 1
         addChild(scoreLabel)
     }
     
     private func addRepeatButton() {
-        repeatButton.position = CGPoint(x:frame.midX, y:frame.midY-80)
+        repeatButton.position = CGPoint(x: frame.midX, y: frame.midY - 80)
         repeatButton.zPosition = 1
         addChild(repeatButton)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
+        guard let touch = touches.first else {
+            return
+        }
         let touchLocation = touch.location(in: self)
-        if !repeatButton.contains(touchLocation) { return }
+        if !repeatButton.contains(touchLocation) {
+            return
+        }
         runGameScene()
     }
     
@@ -78,15 +82,15 @@ class TimesUpScene: SKScene {
         run(SKAction.sequence([
             SKAction.wait(forDuration: 0.5),
             SKAction.run { [weak self] in
-                guard let size = self?.size,
-                    let viewController = self?.viewController,
-                    let store = self?.store
-                    else { return }
-                let transition = SKTransition.fade(withDuration: 1.0)
-                let gameScene = GameScene(size: size, in: viewController, with: store)
-                gameScene.scaleMode = .aspectFill
-                self?.view?.presentScene(gameScene, transition: transition)
+                self?.presentGameScene()
             }])
         )
+    }
+    
+    private func presentGameScene() {
+        let transition = SKTransition.fade(withDuration: 1.0)
+        let gameScene = GameScene(size: size, in: viewController, with: store)
+        gameScene.scaleMode = .aspectFill
+        view?.presentScene(gameScene, transition: transition)
     }
 }

@@ -36,8 +36,16 @@ class StoreCell: UITableViewCell {
     }
     
     private func addImageView() {
-        storeImageView.translatesAutoresizingMaskIntoConstraints = false
         storeImageView.contentMode = .scaleAspectFit
+        storeImageView.layer.masksToBounds = true
+        storeImageView.layer.cornerRadius = 10
+        storeImageView.backgroundColor = store?.backgroundColor
+        storeImageView.image = store?.image
+        addImageViewConstraints()
+    }
+    
+    private func addImageViewConstraints() {
+        storeImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             storeImageView.topAnchor.constraint(equalTo: topAnchor, constant: (frame.size.height-62)/2),
             storeImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -(frame.size.height-62)/2),
@@ -45,26 +53,31 @@ class StoreCell: UITableViewCell {
             storeImageView.widthAnchor.constraint(equalToConstant: 62),
             storeImageView.heightAnchor.constraint(equalToConstant: 62)
             ])
-        storeImageView.layer.masksToBounds = true
-        storeImageView.layer.cornerRadius = 10
-        storeImageView.backgroundColor = store?.backgroundColor
-        storeImageView.image = store?.image
     }
     
     private func addTitleLabel() {
         titleLabel.lineBreakMode = .byWordWrapping
         titleLabel.numberOfLines = 0
         titleLabel.textColor = .black
-        guard let storeName = store?.name else { return }
+        titleLabel.sizeToFit()
+        setupTitleLabelText()
+        addTitleLabelConstraints()
+    }
+    
+    private func setupTitleLabelText() {
+        guard let storeName = store?.name else {
+            return
+        }
         let textString = NSMutableAttributedString(string: storeName, attributes: [
             NSAttributedStringKey.font: UIFont(name: "AvenirNext-Medium", size: 20)!])
         let textRange = NSRange(location: 0, length: textString.length)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 1.29
-        textString.addAttribute(NSAttributedStringKey.paragraphStyle, value:paragraphStyle, range: textRange)
+        textString.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: textRange)
         titleLabel.attributedText = textString
-        titleLabel.sizeToFit()
-        
+    }
+    
+    private func addTitleLabelConstraints() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: frame.size.height/2-30),
@@ -77,9 +90,17 @@ class StoreCell: UITableViewCell {
         scoreValueLabel.lineBreakMode = .byWordWrapping
         scoreValueLabel.numberOfLines = 0
         scoreValueLabel.textColor = .gray
-        guard var cuponScore = store?.cuponScore,
+        scoreValueLabel.sizeToFit()
+        setupScoreValueLabelText()
+        addScoreValueLabelConstraints()
+    }
+    
+    private func setupScoreValueLabelText() {
+        guard var cuponScore = store?.couponScore,
             let maxCuponScore = store?.maxCuponScore
-            else { return }
+            else {
+                return
+        }
         if cuponScore >= maxCuponScore {
             cuponScore = maxCuponScore
             scoreValueLabel.textColor = UIColor(red: 247/255, green: 37/255, blue: 0/255, alpha: 1.0)
@@ -90,21 +111,40 @@ class StoreCell: UITableViewCell {
         let textRange = NSRange(location: 0, length: textString.length)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 1.15
-        textString.addAttribute(NSAttributedStringKey.paragraphStyle, value:paragraphStyle, range: textRange)
+        textString.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: textRange)
         scoreValueLabel.attributedText = textString
-        scoreValueLabel.sizeToFit()
-        
+    }
+    
+    private func addScoreValueLabelConstraints() {
         scoreValueLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            scoreValueLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -(frame.size.height/2-30)),
+            scoreValueLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -(frame.size.height/2 - 30)),
             scoreValueLabel.leadingAnchor.constraint(equalTo: storeImageView.trailingAnchor, constant: 16),
             scoreValueLabel.trailingAnchor.constraint(equalTo: playImageView.leadingAnchor)
             ])
     }
     
     private func addPlayImageView() {
-        playImageView.translatesAutoresizingMaskIntoConstraints = false
+        addPlayImageViewConstraints()
         playImageView.contentMode = .scaleAspectFit
+        setupPlayImageViewImage()
+    }
+    
+    private func setupPlayImageViewImage() {
+        guard let cuponScore = store?.couponScore,
+            let maxCuponScore = store?.maxCuponScore
+            else {
+                return
+        }
+        if cuponScore >= maxCuponScore {
+            playImageView.image = #imageLiteral(resourceName: "redeem_coupon")
+        } else {
+            playImageView.image = #imageLiteral(resourceName: "play_button")
+        }
+    }
+    
+    private func addPlayImageViewConstraints() {
+        playImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             playImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             playImageView.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
@@ -112,14 +152,5 @@ class StoreCell: UITableViewCell {
             playImageView.widthAnchor.constraint(equalToConstant: 84),
             playImageView.heightAnchor.constraint(equalToConstant: 28)
             ])
-        
-        guard let cuponScore = store?.cuponScore,
-            let maxCuponScore = store?.maxCuponScore
-            else { return }
-        if cuponScore >= maxCuponScore {
-            playImageView.image = #imageLiteral(resourceName: "redeem_coupon")
-        } else {
-            playImageView.image = #imageLiteral(resourceName: "play_button")
-        }
     }
 }

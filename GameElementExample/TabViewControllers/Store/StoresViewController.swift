@@ -1,5 +1,5 @@
 //
-//  TabOneViewController.swift
+//  StoresViewController.swift
 //  GameElementExample
 //
 //  Created by Matija Kruljac on 11/29/17.
@@ -9,7 +9,10 @@
 import Foundation
 import UIKit
 
-class TabOneViewController: UIViewController {
+class StoresViewController: UIViewController {
+    
+    private let heightForRow: CGFloat = 100.0
+    private let numberOfSections: Int = 1
     
     private let tableView = UITableView()
     
@@ -17,7 +20,7 @@ class TabOneViewController: UIViewController {
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        setupTitle(inNavigationBar: "Stores")
+        setup(navigationBarTitle: TabBarItems.stores.name)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -33,7 +36,7 @@ class TabOneViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupTitle(inTabBarItem: "Stores")
+        setup(navigationBarTitle: TabBarItems.stores.name)
     }
     
     private func setupTableView() {
@@ -61,10 +64,10 @@ class TabOneViewController: UIViewController {
     }
 }
 
-extension TabOneViewController: UITableViewDataSource {
+extension StoresViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return numberOfSections
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -72,17 +75,21 @@ extension TabOneViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: StoreCell.self), for: indexPath) as? StoreCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: String(describing: StoreCell.self),
+            for: indexPath) as? StoreCell else {
+                return UITableViewCell()
+        }
         cell.setup(with: data[indexPath.row])
         return cell
     }
 }
 
-extension TabOneViewController: UITableViewDelegate {
+extension StoresViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let store = data[indexPath.row]
-        if store.cuponScore < store.maxCuponScore {
+        if store.couponScore < store.maxCuponScore {
             pushGameViewController(with: store)
         } else {
             showAlertView(for: store.name)
@@ -92,26 +99,35 @@ extension TabOneViewController: UITableViewDelegate {
     
     private func showAlertView(for storeName: String) {
         let alert = UIAlertController(
-            title: "Unlocked",
-            message: "You've unlocked coupon for \(storeName)!",
+            title: AlertViewTexts.title.rawValue,
+            message: "\(AlertViewTexts.message.rawValue) \(storeName)!",
             preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: AlertViewTexts.actionTitle.rawValue,
+                                      style: .default,
+                                      handler: nil))
         present(alert, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return heightForRow
     }
 }
 
-extension TabOneViewController: GameViewControllerDelegate {
+extension StoresViewController: GameViewControllerDelegate {
     
     func scoreValueChanged(for store: Store) {
         data.forEach {
             if $0.identifier == store.identifier {
-                $0.cuponScore = store.cuponScore
+                $0.couponScore = store.couponScore
             }
         }
         tableView.reloadData()
     }
+}
+
+enum AlertViewTexts: String {
+    
+    case title = "Unlocked"
+    case message = "You've unlocked coupon for"
+    case actionTitle = "Ok"
 }

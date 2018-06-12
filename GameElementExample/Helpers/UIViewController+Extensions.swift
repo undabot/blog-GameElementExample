@@ -11,7 +11,7 @@ import UIKit
 
 extension UIViewController {
     
-    func setupTitle(inNavigationBar navigationBarTitle: String? = nil, inTabBarItem tabBarItemTitle: String? = nil) {
+    func setup(navigationBarTitle: String? = nil, tabBarItemTitle: String? = nil) {
         if let navigationBarTitle = navigationBarTitle {
             title = navigationBarTitle
         }
@@ -20,11 +20,7 @@ extension UIViewController {
         }
     }
     
-    func setupBackgroundColor(_ color: UIColor? = nil) {
-        guard let color = color else {
-            view.backgroundColor = .white
-            return
-        }
+    func setupBackgroundColor(_ color: UIColor? = .white) {
         view.backgroundColor = color
     }
 }

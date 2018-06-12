@@ -13,11 +13,11 @@ import SpriteKit
 class IncrementLabel: SKLabelNode {
     
     private let value: Int
-    private let cartNode: SKSpriteNode
+    private let cartNodeFrame: CGRect
     
-    init(with value: Int, for cartNode: SKSpriteNode) {
+    init(with value: Int, for cartNodeFrame: CGRect) {
         self.value = value
-        self.cartNode = cartNode
+        self.cartNodeFrame = cartNodeFrame
         super.init()
         setupText()
         zPosition = 1
@@ -34,8 +34,8 @@ class IncrementLabel: SKLabelNode {
         fontSize = 20
         horizontalAlignmentMode = .left
         verticalAlignmentMode = .top
-        position = CGPoint(x: cartNode.frame.origin.x+cartNode.frame.size.width/2,
-                           y: cartNode.frame.origin.y+60)
+        position = CGPoint(x: cartNodeFrame.origin.x+cartNodeFrame.size.width/2,
+                           y: cartNodeFrame.origin.y+60)
     }
     
     func startAnimation() {
@@ -50,8 +50,8 @@ class IncrementLabel: SKLabelNode {
     }
     
     private func calculateRandomX() -> CGFloat {
-        let minValue = position.x-cartNode.frame.width
-        let maxValue = position.x+cartNode.frame.width
+        let minValue = position.x-cartNodeFrame.width
+        let maxValue = position.x+cartNodeFrame.width
         return CGFloat.random(min: minValue, max: maxValue)
     }
 }

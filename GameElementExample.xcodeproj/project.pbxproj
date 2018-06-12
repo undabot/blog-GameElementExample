@@ -7,18 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF1CCAB1206E582200529693 /* Explosion.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1CCAB0206E582200529693 /* Explosion.swift */; };
+		AF1CCAB5206E6DCB00529693 /* StoreFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1CCAB4206E6DCB00529693 /* StoreFactory.swift */; };
 		AF26E6492068F77B001AF282 /* CouponRedeemedMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF26E6482068F77B001AF282 /* CouponRedeemedMessage.swift */; };
+		AF55CB3220B40627009BF668 /* TabBarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF55CB3120B40627009BF668 /* TabBarItems.swift */; };
 		AF80CECE1FCEBB0700D3DF72 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF80CECD1FCEBB0700D3DF72 /* AppDelegate.swift */; };
 		AF80CED01FCEBB0700D3DF72 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF80CECF1FCEBB0700D3DF72 /* TabBarController.swift */; };
 		AF80CED51FCEBB0700D3DF72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF80CED41FCEBB0700D3DF72 /* Assets.xcassets */; };
 		AF80CED81FCEBB0700D3DF72 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF80CED61FCEBB0700D3DF72 /* LaunchScreen.storyboard */; };
-		AF80CEE11FCEDBB100D3DF72 /* TabOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF80CEE01FCEDBB100D3DF72 /* TabOneViewController.swift */; };
-		AF80CEE31FCEDBBE00D3DF72 /* TabTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF80CEE21FCEDBBE00D3DF72 /* TabTwoViewController.swift */; };
-		AF80CEE51FCEDBCA00D3DF72 /* TabThreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF80CEE41FCEDBCA00D3DF72 /* TabThreeViewController.swift */; };
-		AF80CEE71FCEDBD700D3DF72 /* TabFourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF80CEE61FCEDBD700D3DF72 /* TabFourViewController.swift */; };
-		AF80CEE91FCEE8EE00D3DF72 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF80CEE81FCEE8EE00D3DF72 /* UIViewControllerExtensions.swift */; };
+		AF80CEE11FCEDBB100D3DF72 /* StoresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF80CEE01FCEDBB100D3DF72 /* StoresViewController.swift */; };
+		AF80CEE31FCEDBBE00D3DF72 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF80CEE21FCEDBBE00D3DF72 /* ProfileViewController.swift */; };
+		AF80CEE51FCEDBCA00D3DF72 /* CatalogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF80CEE41FCEDBCA00D3DF72 /* CatalogsViewController.swift */; };
+		AF80CEE91FCEE8EE00D3DF72 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF80CEE81FCEE8EE00D3DF72 /* UIViewController+Extensions.swift */; };
 		AF80CEEF1FCF019400D3DF72 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF80CEEE1FCF019400D3DF72 /* GameScene.swift */; };
-		AF80CEF21FD02B5E00D3DF72 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF80CEF11FD02B5E00D3DF72 /* CGFloatExtensions.swift */; };
+		AF80CEF21FD02B5E00D3DF72 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF80CEF11FD02B5E00D3DF72 /* CGFloat+Extensions.swift */; };
 		AF80CEF41FD0600A00D3DF72 /* TimesUpScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF80CEF31FD0600A00D3DF72 /* TimesUpScene.swift */; };
 		AF80CEF61FD1817A00D3DF72 /* InitialScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF80CEF51FD1817A00D3DF72 /* InitialScene.swift */; };
 		AF8D60A01FE1873E00A91B69 /* IncrementLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D609F1FE1873E00A91B69 /* IncrementLabel.swift */; };
@@ -32,20 +34,22 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AF1CCAB0206E582200529693 /* Explosion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Explosion.swift; sourceTree = "<group>"; };
+		AF1CCAB4206E6DCB00529693 /* StoreFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreFactory.swift; sourceTree = "<group>"; };
 		AF26E6482068F77B001AF282 /* CouponRedeemedMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponRedeemedMessage.swift; sourceTree = "<group>"; };
+		AF55CB3120B40627009BF668 /* TabBarItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItems.swift; sourceTree = "<group>"; };
 		AF80CECA1FCEBB0700D3DF72 /* GameElementExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameElementExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF80CECD1FCEBB0700D3DF72 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF80CECF1FCEBB0700D3DF72 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		AF80CED41FCEBB0700D3DF72 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF80CED71FCEBB0700D3DF72 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF80CED91FCEBB0700D3DF72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AF80CEE01FCEDBB100D3DF72 /* TabOneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabOneViewController.swift; sourceTree = "<group>"; };
-		AF80CEE21FCEDBBE00D3DF72 /* TabTwoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabTwoViewController.swift; sourceTree = "<group>"; };
-		AF80CEE41FCEDBCA00D3DF72 /* TabThreeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabThreeViewController.swift; sourceTree = "<group>"; };
-		AF80CEE61FCEDBD700D3DF72 /* TabFourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabFourViewController.swift; sourceTree = "<group>"; };
-		AF80CEE81FCEE8EE00D3DF72 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
+		AF80CEE01FCEDBB100D3DF72 /* StoresViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoresViewController.swift; sourceTree = "<group>"; };
+		AF80CEE21FCEDBBE00D3DF72 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		AF80CEE41FCEDBCA00D3DF72 /* CatalogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogsViewController.swift; sourceTree = "<group>"; };
+		AF80CEE81FCEE8EE00D3DF72 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		AF80CEEE1FCF019400D3DF72 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		AF80CEF11FD02B5E00D3DF72 /* CGFloatExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtensions.swift; sourceTree = "<group>"; };
+		AF80CEF11FD02B5E00D3DF72 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
 		AF80CEF31FD0600A00D3DF72 /* TimesUpScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesUpScene.swift; sourceTree = "<group>"; };
 		AF80CEF51FD1817A00D3DF72 /* InitialScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialScene.swift; sourceTree = "<group>"; };
 		AF8D609F1FE1873E00A91B69 /* IncrementLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncrementLabel.swift; sourceTree = "<group>"; };
@@ -91,6 +95,7 @@
 			children = (
 				AF80CECD1FCEBB0700D3DF72 /* AppDelegate.swift */,
 				AF80CECF1FCEBB0700D3DF72 /* TabBarController.swift */,
+				AF55CB3120B40627009BF668 /* TabBarItems.swift */,
 				AF80CEF01FD02B3500D3DF72 /* Helpers */,
 				AF8D60A71FE2782E00A91B69 /* Models */,
 				AF80CEED1FCF017E00D3DF72 /* Game */,
@@ -107,9 +112,8 @@
 			children = (
 				AF8D60AF1FE2B6A600A91B69 /* Store */,
 				AF8D60AE1FE2B69000A91B69 /* GameViewController */,
-				AF80CEE21FCEDBBE00D3DF72 /* TabTwoViewController.swift */,
-				AF80CEE41FCEDBCA00D3DF72 /* TabThreeViewController.swift */,
-				AF80CEE61FCEDBD700D3DF72 /* TabFourViewController.swift */,
+				AF80CEE21FCEDBBE00D3DF72 /* ProfileViewController.swift */,
+				AF80CEE41FCEDBCA00D3DF72 /* CatalogsViewController.swift */,
 			);
 			path = TabViewControllers;
 			sourceTree = "<group>";
@@ -129,8 +133,8 @@
 		AF80CEF01FD02B3500D3DF72 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				AF80CEE81FCEE8EE00D3DF72 /* UIViewControllerExtensions.swift */,
-				AF80CEF11FD02B5E00D3DF72 /* CGFloatExtensions.swift */,
+				AF80CEE81FCEE8EE00D3DF72 /* UIViewController+Extensions.swift */,
+				AF80CEF11FD02B5E00D3DF72 /* CGFloat+Extensions.swift */,
 				AFB04F9520652EDF00737355 /* SKScene+Extensions.swift */,
 			);
 			path = Helpers;
@@ -141,6 +145,7 @@
 			children = (
 				AF26E6482068F77B001AF282 /* CouponRedeemedMessage.swift */,
 				AF8D609F1FE1873E00A91B69 /* IncrementLabel.swift */,
+				AF1CCAB0206E582200529693 /* Explosion.swift */,
 			);
 			path = SceneElements;
 			sourceTree = "<group>";
@@ -157,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				AF8D60A81FE2784400A91B69 /* Store.swift */,
+				AF1CCAB4206E6DCB00529693 /* StoreFactory.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -174,7 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				AF8D60AA1FE27DD900A91B69 /* StoreCell.swift */,
-				AF80CEE01FCEDBB100D3DF72 /* TabOneViewController.swift */,
+				AF80CEE01FCEDBB100D3DF72 /* StoresViewController.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -197,6 +203,7 @@
 				AF80CEC61FCEBB0700D3DF72 /* Sources */,
 				AF80CEC71FCEBB0700D3DF72 /* Frameworks */,
 				AF80CEC81FCEBB0700D3DF72 /* Resources */,
+				AF55CB3520B45E44009BF668 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -214,7 +221,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0910;
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Matija Kruljac";
 				TargetAttributes = {
 					AF80CEC91FCEBB0700D3DF72 = {
@@ -254,29 +261,47 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		AF55CB3520B45E44009BF668 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AF80CEC61FCEBB0700D3DF72 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF1CCAB5206E6DCB00529693 /* StoreFactory.swift in Sources */,
 				AF8D60A91FE2784400A91B69 /* Store.swift in Sources */,
 				AF8D60A61FE1DE4000A91B69 /* GameViewController.swift in Sources */,
 				AF80CEF61FD1817A00D3DF72 /* InitialScene.swift in Sources */,
+				AF1CCAB1206E582200529693 /* Explosion.swift in Sources */,
 				AF80CED01FCEBB0700D3DF72 /* TabBarController.swift in Sources */,
-				AF80CEE51FCEDBCA00D3DF72 /* TabThreeViewController.swift in Sources */,
+				AF80CEE51FCEDBCA00D3DF72 /* CatalogsViewController.swift in Sources */,
 				AF26E6492068F77B001AF282 /* CouponRedeemedMessage.swift in Sources */,
+				AF55CB3220B40627009BF668 /* TabBarItems.swift in Sources */,
 				AF80CEF41FD0600A00D3DF72 /* TimesUpScene.swift in Sources */,
-				AF80CEF21FD02B5E00D3DF72 /* CGFloatExtensions.swift in Sources */,
+				AF80CEF21FD02B5E00D3DF72 /* CGFloat+Extensions.swift in Sources */,
 				AF8D60AB1FE27DD900A91B69 /* StoreCell.swift in Sources */,
 				AFB04F9620652EDF00737355 /* SKScene+Extensions.swift in Sources */,
 				AF8D60A31FE1D14B00A91B69 /* Catalog.swift in Sources */,
 				AF80CEEF1FCF019400D3DF72 /* GameScene.swift in Sources */,
-				AF80CEE31FCEDBBE00D3DF72 /* TabTwoViewController.swift in Sources */,
-				AF80CEE11FCEDBB100D3DF72 /* TabOneViewController.swift in Sources */,
+				AF80CEE31FCEDBBE00D3DF72 /* ProfileViewController.swift in Sources */,
+				AF80CEE11FCEDBB100D3DF72 /* StoresViewController.swift in Sources */,
 				AF8D60AD1FE29E5900A91B69 /* GameViewControllerDelegate.swift in Sources */,
-				AF80CEE71FCEDBD700D3DF72 /* TabFourViewController.swift in Sources */,
 				AF80CECE1FCEBB0700D3DF72 /* AppDelegate.swift in Sources */,
-				AF80CEE91FCEE8EE00D3DF72 /* UIViewControllerExtensions.swift in Sources */,
+				AF80CEE91FCEE8EE00D3DF72 /* UIViewController+Extensions.swift in Sources */,
 				AF8D60A01FE1873E00A91B69 /* IncrementLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -309,6 +334,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -316,6 +342,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -366,6 +393,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -373,6 +401,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

@@ -42,11 +42,7 @@ class Catalog: SKSpriteNode {
     private func setupInitialSettings() {
         name = "catalog"
         physicsBody = SKPhysicsBody(rectangleOf: size)
-        physicsBody?.categoryBitMask = PhysicsCategory.catalog
-        physicsBody?.contactTestBitMask = PhysicsCategory.cart
-        physicsBody?.collisionBitMask = PhysicsCategory.cart
-        physicsBody?.usesPreciseCollisionDetection = true
-        physicsBody?.allowsRotation = true
+        setupPhysicsBodyCommonProperties(for: self)
         zPosition = 0.5
         position = CGPoint(
             x: CGFloat.random(min: size.width, max: skScene.frame.maxX-size.width),
@@ -57,12 +53,16 @@ class Catalog: SKSpriteNode {
         let catalogImageSize = CGSize(width: self.catalogTexture.size().width-5,
                                       height: self.catalogTexture.size().height-5)
         let catalogImageNode = SKSpriteNode(texture: catalogTexture, size: catalogImageSize)
-        catalogImageNode.physicsBody?.categoryBitMask = PhysicsCategory.catalog
-        catalogImageNode.physicsBody?.contactTestBitMask = PhysicsCategory.cart
-        catalogImageNode.physicsBody?.collisionBitMask = PhysicsCategory.cart
-        catalogImageNode.physicsBody?.usesPreciseCollisionDetection = true
-        catalogImageNode.physicsBody?.allowsRotation = true
+        setupPhysicsBodyCommonProperties(for: catalogImageNode)
         addChild(catalogImageNode)
+    }
+    
+    private func setupPhysicsBodyCommonProperties(for node: SKSpriteNode) {
+        node.physicsBody?.categoryBitMask = PhysicsCategory.catalog
+        node.physicsBody?.contactTestBitMask = PhysicsCategory.cart
+        node.physicsBody?.collisionBitMask = PhysicsCategory.cart
+        node.physicsBody?.usesPreciseCollisionDetection = true
+        node.physicsBody?.allowsRotation = true
     }
     
     private func animate() {
@@ -75,13 +75,16 @@ class Catalog: SKSpriteNode {
         let rotate = SKAction.repeatForever(.rotate(byAngle: angle, duration: 0.2))
         
         run(rotate)
-        run(moveAction)
+        run(moveAction) { [weak self] in
+            self?.removeAllActions()
+            self?.removeFromParent()
+        }
     }
     
     private func determineScoreValue(for duration: CGFloat) -> Int {
         if duration <= 1.4 {
             return 1
-        } else if duration > 1.4 && duration < 1.7 {
+        } else if duration < 1.7 {
             return 2
         } else if duration >= 1.7 {
             return 3

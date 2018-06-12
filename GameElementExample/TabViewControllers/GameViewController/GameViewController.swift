@@ -12,6 +12,8 @@ import SpriteKit
 
 class GameViewController: UIViewController {
     
+    private let gameTitle = "Play to Earn"
+    
     weak var delegate: GameViewControllerDelegate?
     
     private let store: Store
@@ -27,8 +29,8 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTitle(inNavigationBar: "Play to Earn", inTabBarItem: "Game")
-        setupTabBarItem(image: #imageLiteral(resourceName: "game_active"))
+        setup(navigationBarTitle: gameTitle, tabBarItemTitle: TabBarItems.game.name)
+        setupTabBarItem(image: TabBarItems.game.selectedImage)
         setupBackgroundColor()
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     }
@@ -40,7 +42,7 @@ class GameViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        setupTabBarItem(image: #imageLiteral(resourceName: "stores_active"))
+        setupTabBarItem(image: TabBarItems.stores.selectedImage)
     }
     
     func handleGameTimesUp(for store: Store) {
@@ -52,7 +54,9 @@ class GameViewController: UIViewController {
     }
     
     private func setupTabBarItem(image: UIImage) {
-        guard let tabBarItem = tabBarController?.tabBar.items?.first else { return }
+        guard let tabBarItem = tabBarController?.tabBar.items?.first else {
+            return
+        }
         tabBarItem.selectedImage = image
     }
     
@@ -62,11 +66,18 @@ class GameViewController: UIViewController {
             width: view.frame.size.width,
             height: view.frame.size.height))
         let scene = InitialScene(size: view.bounds.size, with: store, in: self)
-        guard let skView = view as? SKView else { return }
+        let skView = getConfiguredSKView()
+        scene.scaleMode = .resizeFill
+        skView?.presentScene(scene)
+    }
+    
+    private func getConfiguredSKView() -> SKView? {
+        guard let skView = view as? SKView else {
+            return nil
+        }
         skView.showsFPS = true
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
-        scene.scaleMode = .resizeFill
-        skView.presentScene(scene)
+        return skView
     }
 }

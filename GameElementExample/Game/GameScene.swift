@@ -17,9 +17,13 @@ class GameScene: SKScene {
     
     private var lastSpawnTimeInterval: TimeInterval = 0
     private var lastUpdateTimeInterval: TimeInterval = 0
+    private let lastSpawnTimeIntervalCeiling: TimeInterval = 0.75
     
     private var score: Int = 0
     private var time: Int = 20
+    
+    private let cartOffsetOnScreenEdges: CGFloat = 15.0
+    private let maximalGeneratedNumberOfCatalogs: Int = 3
     
     private let scoreLabel = SKLabelNode()
     private let timerLabel = SKLabelNode()
@@ -36,7 +40,7 @@ class GameScene: SKScene {
     init(size: CGSize, in viewController: GameViewController, with store: Store) {
         self.viewController = viewController
         self.store = store
-        self.score = store.cuponScore
+        self.score = store.couponScore
         super.init(size: size)
     }
     
@@ -69,7 +73,7 @@ class GameScene: SKScene {
         scoreLabel.fontSize = 20
         scoreLabel.horizontalAlignmentMode = .left
         scoreLabel.verticalAlignmentMode = .top
-        scoreLabel.position = CGPoint(x: 10, y: frame.maxY-100)
+        scoreLabel.position = CGPoint(x: 10, y: frame.maxY - 100)
         scoreLabel.zPosition = 1
         addChild(scoreLabel)
     }
@@ -80,13 +84,13 @@ class GameScene: SKScene {
         timerLabel.fontSize = 20
         timerLabel.horizontalAlignmentMode = .left
         timerLabel.verticalAlignmentMode = .top
-        timerLabel.position = CGPoint(x: 10, y: frame.maxY-140)
+        timerLabel.position = CGPoint(x: 10, y: frame.maxY - 140)
         timerLabel.zPosition = 1
         addChild(timerLabel)
     }
     
     private func addPauseButton() {
-        pausePlayButton.position = CGPoint(x: frame.size.width-35, y: frame.maxY-110)
+        pausePlayButton.position = CGPoint(x: frame.size.width - 35, y: frame.maxY - 110)
         pausePlayButton.size = CGSize(width: 35, height: 35)
         pausePlayButton.zPosition = 1
         addChild(pausePlayButton)
@@ -95,19 +99,19 @@ class GameScene: SKScene {
     private func startTimer() {
         let actionWait = SKAction.wait(forDuration: 1.0)
         let actionRun = SKAction.run { [weak self] in
-            self?.handleTmerTick()
+            self?.handleTimerTick()
         }
         timerLabel.run(SKAction.repeatForever(SKAction.sequence([actionWait, actionRun])))
     }
     
-    private func handleTmerTick() {
+    private func handleTimerTick() {
         if time > 0 {
             time -= 1
             timerLabel.text = "Time: 00:\(time)"
         } else {
-            freezeTheGame()
+            removeCatalogNodes()
             updateCurrentStore()
-            presentTimesUpScene()
+            runTimesUpScene()
             timerLabel.removeAllActions()
         }
     }
@@ -118,32 +122,33 @@ class GameScene: SKScene {
     }
     
     private func updateCurrentStoreScore() {
-        store.cuponScore = score
+        store.couponScore = score
     }
     
-    private func freezeTheGame() {
+    private func removeCatalogNodes() {
         children.forEach {
             guard let node = $0 as? SKSpriteNode,
                 node.name == "catalog"
-                else { return }
+                else {
+                    return
+            }
             node.removeFromParent()
         }
     }
     
-    private func presentTimesUpScene() {
+    private func runTimesUpScene() {
         run(SKAction.sequence([
             SKAction.wait(forDuration: 2.0),
             SKAction.run { [weak self] in
-                guard let size = self?.size,
-                    let score = self?.score,
-                    let viewController = self?.viewController,
-                    let store = self?.store
-                    else { return }
-                let transition = SKTransition.fade(withDuration: 1.0)
-                let timesUpScene = TimesUpScene(with: size, andWith: score, in: viewController, with: store)
-                self?.view?.presentScene(timesUpScene, transition: transition)
+                self?.presentTimesUpScene()
             }]
         ))
+    }
+    
+    private func presentTimesUpScene() {
+        let transition = SKTransition.fade(withDuration: 1.0)
+        let timesUpScene = TimesUpScene(with: size, andWith: score, in: viewController, with: store)
+        view?.presentScene(timesUpScene, transition: transition)
     }
     
     private func addCart() {
@@ -162,10 +167,14 @@ class GameScene: SKScene {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         touches.forEach { [weak self] touch in
-            guard let welf = self else { return }
+            guard let welf = self else {
+                return
+            }
             let location = touch.location(in: welf)
             let node: SKNode = atPoint(location)
-            if node.name != "cart" { return }
+            if node.name != "cart" {
+                return
+            }
             cart.removeAction(forKey: "repeatedCartMovementAction")
         }
     }
@@ -175,7 +184,9 @@ class GameScene: SKScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
+        guard let touch = touches.first else {
+            return
+        }
         let touchLocation = touch.location(in: self)
         if pausePlayButton.contains(touchLocation) {
             handlePausePlayButtonTap()
@@ -183,6 +194,7 @@ class GameScene: SKScene {
         }
         if let couponRedeemedMessage = couponRedeemedMessage,
             couponRedeemedMessage.contains(touchLocation) {
+            removeCatalogNodes()
             viewController.popFromNavigationStack()
             return
         }
@@ -227,9 +239,9 @@ class GameScene: SKScene {
     
     private func calculateNewXValue(from location: CGPoint) -> CGFloat {
         if location.x > frame.midX {
-            return cart.position.x+15
+            return cart.position.x+cartOffsetOnScreenEdges
         }
-        return cart.position.x-15
+        return cart.position.x-cartOffsetOnScreenEdges
     }
     
     private func repeatCartMovement(with runAction: SKAction) {
@@ -241,25 +253,32 @@ class GameScene: SKScene {
     
     private func updateWithTimeSinceLastUpdate(timeSinceLast: CFTimeInterval) {
         lastSpawnTimeInterval = timeSinceLast + lastSpawnTimeInterval
-        if lastSpawnTimeInterval < 0.75 { return }
+        if lastSpawnTimeInterval < lastSpawnTimeIntervalCeiling {
+            return
+        }
         lastSpawnTimeInterval = 0
         addCatalogsIfNeeded()
     }
     
     private func addCatalogsIfNeeded() {
-        if time == 0 { return }
-        for _ in 0...random(min: 0, max: 3) {
+        if time == 0 {
+            return
+        }
+        for _ in 0...random(min: 0, max: maximalGeneratedNumberOfCatalogs) {
             addCatalog()
         }
     }
     
     private func addCatalog() {
         let catalog = Catalog(skScene: self, store: store)
+        catalog.name = "catalog"
         addChild(catalog)
     }
     
     private func random(min: Int, max: Int) -> Int {
-        guard min < max else { return min }
+        guard min < max else {
+            return min
+        }
         return Int(arc4random_uniform(UInt32(1 + max - min))) + min
     }
     
@@ -282,9 +301,12 @@ extension GameScene: SKPhysicsContactDelegate {
     }
     
     private func handleCartIfNeeded(in contact: SKPhysicsContact) {
-        if contact.bodyA.categoryBitMask != PhysicsCategory.cart { return }
-        guard let _ = contact.bodyA.node as? SKSpriteNode else { return }
-        pulse(cart: cart)
+        if contact.bodyA.categoryBitMask != PhysicsCategory.cart {
+            return
+        }
+        if contact.bodyA.node as? SKSpriteNode != nil {
+            pulse(cart: cart)
+        }
     }
     
     private func pulse(cart: SKSpriteNode) {
@@ -298,13 +320,19 @@ extension GameScene: SKPhysicsContactDelegate {
     }
     
     private func handleCatalogIfNeeded(in contact: SKPhysicsContact) {
-        if contact.bodyB.categoryBitMask != PhysicsCategory.catalog { return }
-        guard let catalog = contact.bodyB.node as? Catalog else { return }
-        let cartFrame = CGRect(x: cart.frame.origin.x+20,
+        if contact.bodyB.categoryBitMask != PhysicsCategory.catalog {
+            return
+        }
+        guard let catalog = contact.bodyB.node as? Catalog else {
+            return
+        }
+        let cartFrame = CGRect(x: cart.frame.origin.x + 20,
                                y: cart.frame.origin.y,
-                               width: cart.frame.size.width-40,
+                               width: cart.frame.size.width - 40,
                                height: cart.frame.size.height)
-        if !cartFrame.intersects(catalog.frame) { return }
+        if !cartFrame.intersects(catalog.frame) {
+            return
+        }
         updateScore(for: catalog.scoreValue)
         addIncrementLabel(for: catalog.scoreValue)
         run(SKAction.playSoundFileNamed("catch.mp3", waitForCompletion: false))
@@ -325,7 +353,7 @@ extension GameScene: SKPhysicsContactDelegate {
     }
     
     private func presentCouponRedeemedSceneIfNeeded() {
-        let size = CGSize(width: frame.size.width-50, height: 150)
+        let size = CGSize(width: frame.size.width - 50, height: 150)
         couponRedeemedMessage = CouponRedeemedMessage(size: size, store: store)
         guard let couponRedeemedMessage = couponRedeemedMessage else {
             return
@@ -342,7 +370,7 @@ extension GameScene: SKPhysicsContactDelegate {
     }
     
     private func addIncrementLabel(for value: Int) {
-        let incrementLabel = IncrementLabel(with: value, for: cart)
+        let incrementLabel = IncrementLabel(with: value, for: cart.frame)
         addChild(incrementLabel)
         incrementLabel.startAnimation()
     }

@@ -1,5 +1,5 @@
 //
-//  TabTwoViewController.swift
+//  ProfileViewController.swift
 //  GameElementExample
 //
 //  Created by Matija Kruljac on 11/29/17.
@@ -9,13 +9,13 @@
 import Foundation
 import UIKit
 
-class TabTwoViewController: UIViewController {
+class ProfileViewController: UIViewController {
     
     private let userImageView = UIImageView()
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        setupTitle(inNavigationBar: "Profile")
+        setup(navigationBarTitle: TabBarItems.profile.name)
     }
     
     required init?(coder aDecoder: NSCoder) {

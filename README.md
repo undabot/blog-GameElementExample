@@ -6,7 +6,6 @@ We all want our iOS applications to be user friendly and interactive as much as 
 
 ### Blog content
 * Intro 
-* Bussines logic
 * Gamification
 * Example app
 * Adding gaming animations

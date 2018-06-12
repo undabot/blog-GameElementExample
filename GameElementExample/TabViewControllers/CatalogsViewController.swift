@@ -1,5 +1,5 @@
 //
-//  TabThreeViewController.swift
+//  CatalogsViewController.swift
 //  GameElementExample
 //
 //  Created by Matija Kruljac on 11/29/17.
@@ -9,11 +9,11 @@
 import Foundation
 import UIKit
 
-class TabThreeViewController: UIViewController {
+class CatalogsViewController: UIViewController {
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        setupTitle(inNavigationBar: "Catalogs")
+        setup(navigationBarTitle: TabBarItems.catalogs.name)
     }
     
     required init?(coder aDecoder: NSCoder) {

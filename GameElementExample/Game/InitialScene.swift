@@ -16,8 +16,10 @@ class InitialScene: SKScene {
     private let store: Store
     
     private let storeNameLabel = SKLabelNode()
-    private let explosion = SKEmitterNode()
     private let playButton = SKSpriteNode(imageNamed: "play_game")
+    
+    private lazy var explosion = Explosion(particleColor: self.store.backgroundColor,
+                                           position: CGPoint(x: frame.midX, y: frame.midY + 50))
     
     init(size: CGSize, with store: Store, in viewController: GameViewController) {
         self.store = store
@@ -48,13 +50,13 @@ class InitialScene: SKScene {
         let texture = SKTexture(image: store.image)
         let size = CGSize(width: 90, height: 90)
         let storeImage = SKSpriteNode(texture: texture, color: .clear, size: size)
-        storeImage.position = CGPoint(x: frame.midX, y: frame.midY+150)
+        storeImage.position = CGPoint(x: frame.midX, y: frame.midY + 150)
         storeImage.zPosition = 1
         addChild(storeImage)
     }
     
     private func addStoreNameLabel() {
-        let position = CGPoint(x: frame.midX, y: frame.midY+50)
+        let position = CGPoint(x: frame.midX, y: frame.midY + 50)
         storeNameLabel.text = store.name
         storeNameLabel.fontColor = .white
         storeNameLabel.fontName = "PingFangTC-Medium"
@@ -79,33 +81,6 @@ class InitialScene: SKScene {
     }
     
     private func addExplosionOnStoreNameLabel() {
-        let image = UIImage(named:"gray_catalog.png")!
-        explosion.xScale = 2
-        explosion.yScale = 1
-        explosion.particleTexture = SKTexture(image: image)
-        explosion.particleColor = store.backgroundColor
-        explosion.numParticlesToEmit = 270
-        explosion.particleBirthRate = 270
-        explosion.particleLifetime = 2
-        explosion.emissionAngleRange = 360
-        explosion.particleSpeed = 50
-        explosion.particleSpeedRange = 360
-        explosion.xAcceleration = 0
-        explosion.yAcceleration = 0
-        explosion.particleAlpha = 0.5
-        explosion.particleAlphaRange = 0.2
-        explosion.particleAlphaSpeed = -0.5
-        explosion.particleScale = 0.4
-        explosion.particleScaleRange = 0.3
-        explosion.particleScaleSpeed = -0.5
-        explosion.particleRotation = 0
-        explosion.particleRotationRange = 0
-        explosion.particleRotationSpeed = 0
-        explosion.particleColorBlendFactor = 1
-        explosion.particleColorBlendFactorRange = 0
-        explosion.particleColorBlendFactorSpeed = 0
-        explosion.particleBlendMode = .add
-        explosion.position = CGPoint(x: frame.midX, y: frame.midY+50)
         addChild(explosion)
     }
     
@@ -124,9 +99,13 @@ class InitialScene: SKScene {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
+        guard let touch = touches.first else {
+            return
+        }
         let touchLocation = touch.location(in: self)
-        if !playButton.contains(touchLocation) { return }
+        if !playButton.contains(touchLocation) {
+            return
+        }
         runGameScene()
     }
     
