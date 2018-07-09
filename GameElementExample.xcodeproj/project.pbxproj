@@ -31,6 +31,7 @@
 		AF8D60AD1FE29E5900A91B69 /* GameViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8D60AC1FE29E5900A91B69 /* GameViewControllerDelegate.swift */; };
 		AFB04F9620652EDF00737355 /* SKScene+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB04F9520652EDF00737355 /* SKScene+Extensions.swift */; };
 		AFB8C23B1FE6FAFE00967164 /* catch.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AFB8C23A1FE6FAFE00967164 /* catch.mp3 */; };
+		AFF450E920F3802F00CDA7C9 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF450E820F3802F00CDA7C9 /* UIImage+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		AF8D60AC1FE29E5900A91B69 /* GameViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewControllerDelegate.swift; sourceTree = "<group>"; };
 		AFB04F9520652EDF00737355 /* SKScene+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+Extensions.swift"; sourceTree = "<group>"; };
 		AFB8C23A1FE6FAFE00967164 /* catch.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = catch.mp3; sourceTree = "<group>"; };
+		AFF450E820F3802F00CDA7C9 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				AF80CEE81FCEE8EE00D3DF72 /* UIViewController+Extensions.swift */,
+				AFF450E820F3802F00CDA7C9 /* UIImage+Extensions.swift */,
 				AF80CEF11FD02B5E00D3DF72 /* CGFloat+Extensions.swift */,
 				AFB04F9520652EDF00737355 /* SKScene+Extensions.swift */,
 			);
@@ -297,6 +300,7 @@
 				AFB04F9620652EDF00737355 /* SKScene+Extensions.swift in Sources */,
 				AF8D60A31FE1D14B00A91B69 /* Catalog.swift in Sources */,
 				AF80CEEF1FCF019400D3DF72 /* GameScene.swift in Sources */,
+				AFF450E920F3802F00CDA7C9 /* UIImage+Extensions.swift in Sources */,
 				AF80CEE31FCEDBBE00D3DF72 /* ProfileViewController.swift in Sources */,
 				AF80CEE11FCEDBB100D3DF72 /* StoresViewController.swift in Sources */,
 				AF8D60AD1FE29E5900A91B69 /* GameViewControllerDelegate.swift in Sources */,

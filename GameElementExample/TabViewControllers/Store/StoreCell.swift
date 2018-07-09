@@ -40,7 +40,8 @@ class StoreCell: UITableViewCell {
         storeImageView.layer.masksToBounds = true
         storeImageView.layer.cornerRadius = 10
         storeImageView.backgroundColor = store?.backgroundColor
-        storeImageView.image = store?.image
+        let imageInsets = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 4)
+        storeImageView.image = store?.image.imageWithInsets(imageInsets)
         addImageViewConstraints()
     }
     
